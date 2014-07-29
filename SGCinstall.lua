@@ -154,7 +154,17 @@ function run()
 				if pcall(readNumber, temp) then
 					turtle = temp[1]
 				else 
-					print("Not a number. You'll need to edit SGC_config.txt with the proper id.")
+					print("Not a number. You'll need to edit SGC_config.txt with the proper id.")				
+				end
+
+				print()
+				print("What is the id of the information panel")
+				local temp = {}
+				local infopanel = "unknown"
+				if pcall(readNumber, temp) then
+					infopanel = temp[1]
+				else 
+					print("Not a number. You'll need to edit SGC_config.txt with the proper id.")	
 				end
 
 				print()
@@ -163,6 +173,7 @@ function run()
 				config.writeLine(monitor_side)
 				config.writeLine(modem_side)
 				config.writeLine(turtle)
+				config.writeLine(infopanel)
 				config.close()
 			end
 		end 
@@ -171,12 +182,12 @@ function run()
 			print("Dialer must be a turtle!")
 			return
 		end
-		if not getAndSave("https://raw.github.com/Lobisomen/sg_control/master/SGDial.lua","/SGDial") then
+		if not getAndSave("https://raw.githubusercontent.com/Lobisomen/sg_control/master/SGDial.lua","/SGDial") then
 			print("Failed to download SGDial")
 			return
 		else
 			print("Installed SGDial")
-			if not getAndSave("https://raw.github.com/Lobisomen/sg_control/master/dialer_startup.lua","/startup") then
+			if not getAndSave("https://raw.githubusercontent.com/Lobisomen/sg_control/master/dialer_startup.lua","/startup") then
 				print("Failed to install startup script")
 				return
 			end
