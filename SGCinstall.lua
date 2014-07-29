@@ -249,5 +249,4 @@ end
 
 run()
 print("Cleaning up - removing SGCinstall")
--- shell.run("rm",shell.getRunningProgram())
 shell.run("rm",shell.getRunningProgram())
