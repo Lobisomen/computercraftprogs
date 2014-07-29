@@ -158,7 +158,7 @@ function run()
 				end
 
 				print()
-				print("What is the id of the information panel?")
+				print("What is the id of the information panel")
 				local temp = {}
 				local infopanel = "unknown"
 				if pcall(readNumber, temp) then
@@ -224,9 +224,19 @@ function run()
 		printUsage()
 		return
 	end
-     end
-	elseif #tArgs == 1 and tArgs[1] == "infopanel" then	
-			if not getAndSave("https://raw.githubusercontent.com/Lobisomen/sg_worlds/master/SGInfo.lua","/SGInfo") then
+
+	print("------------------------------------------")
+	print(version .. " successfully installed. You will need to edit it to input the correct sides for its peripherals "..peripherals)
+	print("")
+	if version == "SGDial" then
+		print("This machine's id: "..os.getComputerID())
+	end
+	
+
+end
+
+elseif #tArgs == 1 and tArgs[1] == "infopanel" then
+		if not getAndSave("https://raw.githubusercontent.com/Lobisomen/sg_worlds/master/SGInfo.lua","/SGInfo") then
 			print("Failed to download SGInfo")
 			return
 		else
@@ -237,19 +247,12 @@ function run()
 			end
 			print("Set SGInfo to run on startup")
 			version = "SGInfo"
-			
+			print("")
+			if version == "SGInfo" then
+			print("This machine's id: "..os.getComputerID())
 	end
 
-	print("------------------------------------------")
-	print(version .. " successfully installed. You will need to edit it to input the correct sides for its peripherals "..peripherals)
-	print("")
-	if version == "SGDial" then
-		print("This machine's id: "..os.getComputerID())
-	end
-	if version == "SGInfo" then
-		print("This machine's id: "..os.getComputerID())
-	end
-
+end
 
 run()
 print("Cleaning up - removing SGCinstall")
