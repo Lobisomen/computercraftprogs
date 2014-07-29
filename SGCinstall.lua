@@ -249,7 +249,7 @@ function run()
 	if version == "SGInfo" then
 		print("This machine's id: "..os.getComputerID())
 	end
-	
+     end
 
 end
 
