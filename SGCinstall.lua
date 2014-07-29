@@ -59,7 +59,7 @@ end
 
 local function printUsage()
 	print("Lite installation script for kode and stargate control")
-	print("Usage: SGCinstall <dialer/controller/infopanel>")
+	print("Usage: SGCinstall <dialer/controller>")
 	print()
 end
 
@@ -158,7 +158,7 @@ function run()
 				end
 
 				print()
-				print("What is the id of the information panel")
+				print("What is the id of the information panel?")
 				local temp = {}
 				local infopanel = "unknown"
 				if pcall(readNumber, temp) then
@@ -177,17 +177,17 @@ function run()
 				config.close()
 			end
 		end 
-	    if #tArgs == 1 and tArgs[1] == "dialer" then
+	elseif #tArgs == 1 and tArgs[1] == "dialer" then
 		if turtle == nil then
 			print("Dialer must be a turtle!")
 			return
 		end
-		if not getAndSave("https://raw.githubusercontent.com/Lobisomen/sg_control/master/SGDial.lua","/SGDial") then
+		if not getAndSave("https://raw.github.com/Lobisomen/sg_control/master/SGDial.lua","/SGDial") then
 			print("Failed to download SGDial")
 			return
 		else
 			print("Installed SGDial")
-			if not getAndSave("https://raw.githubusercontent.com/Lobisomen/sg_control/master/dialer_startup.lua","/startup") then
+			if not getAndSave("https://raw.github.com/Lobisomen/sg_control/master/dialer_startup.lua","/startup") then
 				print("Failed to install startup script")
 				return
 			end
@@ -219,7 +219,21 @@ function run()
 			config.close()
 		end
 
-	else
+		
+	elseif #tArgs == 1 and tArgs[1] == "infopanel" then
+		if not getAndSave("https://raw.github.com/Lobisomen/sg_worlds/master/SGInfo","/SGInfo") then
+			print("Failed to download SGInfo")
+			return
+		else
+			print("Installed SGInfo")
+			if not getAndSave("https://raw.github.com/Lobisomen/sg_worlds/master/infopanel_startup.lua","/startup") then
+				print("Failed to install startup script")
+				return
+				end
+		end		
+		
+		
+	else	
 		error("Illegal argument(s)")
 		printUsage()
 		return
@@ -232,25 +246,6 @@ function run()
 		print("This machine's id: "..os.getComputerID())
 	end
 	
-
-
-
-        if #tArgs == 1 and tArgs[1] == "infopanel" then
-		if not getAndSave("https://raw.githubusercontent.com/Lobisomen/sg_worlds/master/SGInfo.lua","/SGInfo") then
-			print("Failed to download SGInfo")
-			return
-		else
-			print("Installed SGInfo")
-			if not getAndSave("https://raw.githubusercontent.com/Lobisomen/sg_worlds/master/infopanel_startup.lua","/startup") then
-				print("Failed to install startup script")
-				return
-			end
-			print("Set SGInfo to run on startup")
-			version = "SGInfo"
-			print("")
-			if version == "SGInfo" then
-			print("This machine's id: "..os.getComputerID())
-	end
 
 end
 
