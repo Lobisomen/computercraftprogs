@@ -221,12 +221,12 @@ function run()
 
 		
 	elseif #tArgs == 1 and tArgs[1] == "infopanel" then
-		if not getAndSave("https://raw.github.com/Lobisomen/sg_worlds/master/SGInfo","/SGInfo") then
+		if not getAndSave("https://raw.github.com/Lobisomen/sg_worlds/master/SGInfo.lua","/SGInfo") then
 			print("Failed to download SGInfo")
 			return
 		else
 			print("Installed SGInfo")
-			if not getAndSave("https://raw.github.com/Lobisomen/sg_worlds/master/infopanel_startup.lua","/startup") then
+		if not getAndSave("https://raw.github.com/Lobisomen/sg_worlds/master/infopanel_startup.lua","/startup") then
 				print("Failed to install startup script")
 				return
 				end
