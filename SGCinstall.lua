@@ -171,12 +171,12 @@ function run()
 			print("Dialer must be a turtle!")
 			return
 		end
-		if not getAndSave("https://raw.github.com/Zenith-One/sg_control/master/SGDial.lua","/SGDial") then
+		if not getAndSave("https://raw.githubusercontent.com/Lobisomen/sg_control/master/SGDial.lua","/SGDial") then
 			print("Failed to download SGDial")
 			return
 		else
 			print("Installed SGDial")
-			if not getAndSave("https://raw.github.com/Zenith-One/sg_control/master/dialer_startup.lua","/startup") then
+			if not getAndSave("https://raw.githubusercontent.com/Lobisomen/sg_control/master/dialer_startup.lua","/startup") then
 				print("Failed to install startup script")
 				return
 			end
