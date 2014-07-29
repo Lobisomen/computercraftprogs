@@ -233,7 +233,7 @@ function run()
 	end
 	
 
-end
+
 
         if #tArgs == 1 and tArgs[1] == "infopanel" then
 		if not getAndSave("https://raw.githubusercontent.com/Lobisomen/sg_worlds/master/SGInfo.lua","/SGInfo") then
