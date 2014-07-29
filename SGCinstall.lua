@@ -250,7 +250,6 @@ function run()
 		print("This machine's id: "..os.getComputerID())
 	end
 
-end
 
 run()
 print("Cleaning up - removing SGCinstall")
