@@ -177,7 +177,7 @@ function run()
 				config.close()
 			end
 		end 
-	elseif #tArgs == 1 and tArgs[1] == "dialer" then
+	    if #tArgs == 1 and tArgs[1] == "dialer" then
 		if turtle == nil then
 			print("Dialer must be a turtle!")
 			return
@@ -235,7 +235,7 @@ function run()
 
 end
 
-elseif #tArgs == 1 and tArgs[1] == "infopanel" then
+        if #tArgs == 1 and tArgs[1] == "infopanel" then
 		if not getAndSave("https://raw.githubusercontent.com/Lobisomen/sg_worlds/master/SGInfo.lua","/SGInfo") then
 			print("Failed to download SGInfo")
 			return
