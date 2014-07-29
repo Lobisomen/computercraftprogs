@@ -59,7 +59,7 @@ end
 
 local function printUsage()
 	print("Lite installation script for kode and stargate control")
-	print("Usage: SGCinstall <dialer/controller>")
+	print("Usage: SGCinstall <dialer/controller/infopanel>")
 	print()
 end
 
@@ -158,7 +158,7 @@ function run()
 				end
 
 				print()
-				print("What is the id of the information panel")
+				print("What is the id of the information panel?")
 				local temp = {}
 				local infopanel = "unknown"
 				if pcall(readNumber, temp) then
@@ -224,11 +224,29 @@ function run()
 		printUsage()
 		return
 	end
+	
+	elseif #tArgs == 1 and tArgs[1] == "infopanel" then	
+			if not getAndSave("https://raw.githubusercontent.com/Lobisomen/sg_worlds/master/SGInfo.lua","/SGInfo") then
+			print("Failed to download SGInfo")
+			return
+		else
+			print("Installed SGInfo")
+			if not getAndSave("https://raw.githubusercontent.com/Lobisomen/sg_worlds/master/infopanel_startup.lua","/startup") then
+				print("Failed to install startup script")
+				return
+			end
+			print("Set SGInfo to run on startup")
+			version = "SGInfo"
+			
+	end
 
 	print("------------------------------------------")
 	print(version .. " successfully installed. You will need to edit it to input the correct sides for its peripherals "..peripherals)
 	print("")
 	if version == "SGDial" then
+		print("This machine's id: "..os.getComputerID())
+	end
+	if version == "SGInfo" then
 		print("This machine's id: "..os.getComputerID())
 	end
 	
