@@ -59,7 +59,7 @@ end
 
 local function printUsage()
 	print("Lite installation script for kode and stargate control")
-	print("Usage: SGCinstall <dialer/controller>")
+	print("Usage: SGCinstall <dialer/controller/infopanel>")
 	print()
 end
 
@@ -176,7 +176,20 @@ function run()
 				config.writeLine(infopanel)
 				config.close()
 			end
-		end 
+		end
+	 elseif #tArgs == 1 and tArgs[1] == "infopanel" then
+		if not getAndSave("https://raw.github.com/Lobisomen/sg_worlds/master/SGInfo.lua","/SGInfo") then
+			print("Failed to download SGInfo")
+			return
+		else
+			print("Installed SGInfo")
+		if not getAndSave("https://raw.github.com/Lobisomen/sg_worlds/master/infopanel.startup.lua","/startup") then
+				print("Failed to install startup script")
+				return
+			end
+			    print("Set SGInfo to run on startup")
+				print()
+		end
 	elseif #tArgs == 1 and tArgs[1] == "dialer" then
 		if turtle == nil then
 			print("Dialer must be a turtle!")
@@ -217,22 +230,7 @@ function run()
 			config.writeLine(sg_side)
 			config.writeLine(sg_dir)
 			config.close()
-		end
-
-		
-	elseif #tArgs == 1 and tArgs[1] == "infopanel" then
-		if not getAndSave("https://raw.github.com/Lobisomen/sg_worlds/master/SGInfo.lua","/SGInfo") then
-			print("Failed to download SGInfo")
-			return
-		else
-			print("Installed SGInfo")
-		if not getAndSave("https://raw.github.com/Lobisomen/sg_worlds/master/infopanel_startup.lua","/startup") then
-				print("Failed to install startup script")
-				return
-				end
 		end		
-		
-		
 	else	
 		error("Illegal argument(s)")
 		printUsage()
@@ -251,4 +249,5 @@ end
 
 run()
 print("Cleaning up - removing SGCinstall")
+-- shell.run("rm",shell.getRunningProgram())
 shell.run("rm",shell.getRunningProgram())
