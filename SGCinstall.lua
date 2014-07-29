@@ -188,7 +188,7 @@ function run()
 				return
 			end
 			    print("Set SGInfo to run on startup")
-				print()
+				version = "SGDial"
 		end
 	elseif #tArgs == 1 and tArgs[1] == "dialer" then
 		if turtle == nil then
