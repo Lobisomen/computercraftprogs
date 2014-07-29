@@ -8,7 +8,7 @@ sleep(rnd)
 
 -- install any updates to this startup script
 print("Updating startup script")
-local start_src = http.get("https://raw.githubusercontent.com/Lobisomen/sg_control/master/dialer_startup.lua")
+local start_src = http.get("https://raw.github.com/Lobisomen/sg_control/master/dialer_startup.lua")
 if start_src ~= nil then
 	local file = fs.open("/startup","w")
 	file.write(start_src.readAll())
@@ -23,7 +23,7 @@ print()
 
 -- install any updates to SGDial
 print("Updating SGDial")
-local sgd_src = http.get("https://raw.githubusercontent.com/Lobisomen/sg_control/master/SGDial.lua")
+local sgd_src = http.get("https://raw.github.com/Lobisomen/sg_control/master/SGDial.lua")
 if sgd_src ~= nil then
 	local file = fs.open("/SGDial","w")
 	file.write(sgd_src.readAll())
