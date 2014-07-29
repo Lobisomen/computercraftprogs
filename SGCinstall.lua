@@ -78,12 +78,12 @@ function run()
 
 	if #tArgs == 1 and tArgs[1] == "controller" then
 		emulateDisk()
-		if not getAndSave("https://raw.github.com/Zenith-One/sg_control/master/SGControl.lua","/SGControl") then
+		if not getAndSave("https://raw.github.com/Lobisomen/sg_control/master/SGControl.lua","/SGControl") then
 			print("Failed to download SGControl")
 			return
 		else	
 			print("Installed SGControl")
-			if not getAndSave("https://raw.github.com/Zenith-One/sg_control/master/controller_startup.lua","/startup") then
+			if not getAndSave("https://raw.github.com/Lobisomen/sg_control/master/controller_startup.lua","/startup") then
 				print("Failed to install startup script")
 				return
 			end
@@ -120,7 +120,7 @@ function run()
 			auth(kode_un,kode_pw)
 			print("kode auth set up.")
 			
-			if not getAndSave("https://raw.github.com/Zenith-One/sg_control/master/button.lua","/button") then
+			if not getAndSave("https://raw.github.com/Lobisomen/sg_control/master/button.lua","/button") then
 				print("Failed to install button API")
 				return
 			else
