@@ -15,6 +15,8 @@ function loadConfig()
   print("modem: "..out.modem)
   out.dialer  = config.readLine()
   print("dialer: "..out.dialer)
+  out.infopanel  = config.readLine()
+  print("infopanel: "..out.infopanel)
   
   return out
 end
@@ -23,6 +25,7 @@ local page = 1
 local pages = 0
 local names = {}
 local dialers = {}
+local infopanels = {}
 local remove = false
 local outOfFuel = false
 
@@ -39,6 +42,10 @@ end
 
 function fillDialers(dialer)
    dialers[1] = tonumber(dialer)
+end
+
+function fillInfoPanels(infopanel)
+   infopanels[1] = tonumber(infopanel)
 end
 
 function printTable(table)
@@ -229,6 +236,8 @@ function dial(info)
   button.toggleButton(name)
   print("Requesting dialer to dial "..name.." ("..addr..")")
   data = "dial|"..addr
+  info = "dial|"..name
+  rednet.send(infopanels[1], info)
   rednet.send(tonumber(dialer), data)
   local id, msg, dis = rednet.receive(8)
   if (msg == nil) then
@@ -346,6 +355,30 @@ function checkDialer()
   return success
 end
 
+function checkInfoPanel()
+  print "Pinging infopanel..."
+  rednet.send(infopanels[1], "ping")
+  local success = false
+  local id, msg, dis = rednet.receive(5)
+  if (msg == nil) then
+    for i = 2,5 do
+      term.setTextColor(colors.red)
+      print("Infopanel did not respond. Trying again.")
+      term.setTextColor(colors.white)
+      print("Pinging infopanel (attempt "..i.. " of 5)...")
+      rednet.send(infopanels[1], "ping")
+      local id, msg, dis = rednet.receive(5)
+      if (msg ~= nil) then
+        success = true
+        break
+      end
+    end
+  else
+    success = true
+  end
+  return success
+end
+
 -- 
 function run()
   printHeader()
@@ -367,6 +400,7 @@ function run()
   button.setup(m)
   print("button API initialized")
   fillDialers(config.dialer)
+  fillInfoPanels(config.infopanel)
 
   if not checkDialer() then
     term.setTextColor(colors.red)
@@ -376,6 +410,16 @@ function run()
   else
     print("Dialer locked in")
   end
+  
+  if not checkInfoPanel() then
+    term.setTextColor(colors.red)
+    print("InfoPanel failed to respond. Is it offline?")
+    term.setTextColor(colors.white)
+    return
+  else
+    print("Infopanel locked in")
+  end  
+  
   getNames()
   print("Addresses loaded")
   fillTable()
